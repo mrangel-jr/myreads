@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import Bookshelf from './Bookshelf'
+import SearchBooks from './SearchBooks'
 import { Route } from 'react-router-dom'
 import './App.css'
 import * as BooksAPI from './BooksAPI'
 
 
 class BooksApp extends Component {
+
   state = {
     /**
      * TODO: Instead of using this state variable to keep track of which page
@@ -13,21 +15,23 @@ class BooksApp extends Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false,
     books: []
   }
 
-  componentDidlMount() {
-    BooksAPI.getAll().then( (books) =>
-      this.setState({ books })
-    )
+  componentDidMount() {
+    this.getBooks();
   }
 
-  updateBook = (book,value) => {
-    book.shelf=value
-    this.setState( (state) => ({
-      books: state.books.filter((b) => b.id !== book.id).concat([ book ])
-    }))
+  getBooks() {
+   BooksAPI.getAll().then( (books) =>
+      this.setState({ books })
+    ) 
+  }
+
+  updateBook = (book,shelf) => {
+    BooksAPI.update(book,shelf).then( () => {
+      this.getBooks()
+    })
   }
 
 
@@ -38,6 +42,15 @@ class BooksApp extends Component {
           <Bookshelf
               books={this.state.books} 
               onUpdateBook={this.updateBook}
+          />
+        )}/>
+        <Route path="/search" render={({history}) => (
+          <SearchBooks
+              books={this.state.books} 
+              onUpdateBook={(book,shelf) => {
+                this.updateBook(book,shelf)
+                history.push('/')
+              }}
           />
         )}/>
       </div>
