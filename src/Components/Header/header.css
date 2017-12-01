@@ -30,3 +30,14 @@ div {
   text-align: center;
   justify-content: center;
 }
+
+@media screen and (min-width: 1800px) {
+  .text-logo {
+    font-size: 6vw;
+    top:0;
+  }
+
+  .diagonal-gradient {
+    height: 320px;
+  }
+}

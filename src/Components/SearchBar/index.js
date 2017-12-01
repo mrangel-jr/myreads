@@ -14,11 +14,11 @@ class SearchBar extends Component {
 
   updateQuery(e) {
     this.setState({ query: e.target.value });
+    this.submitQuery();
   }
 
 
-  submitQuery(e) {
-    e.preventDefault();
+  submitQuery() {
     this.props.onSearch(this.state.query);
   }
 
@@ -26,7 +26,7 @@ class SearchBar extends Component {
 
     const {clearSearch} = this.props;
     return (
-      <form className="form-searchbar" onSubmit={this.submitQuery}>
+      <div className="searchbar">
       <Link className="fa fa-arrow-left button-icon" aria-hidden="true" to="/" onClick={() => clearSearch()}/>      
         <input
           className="input-data"
@@ -35,8 +35,7 @@ class SearchBar extends Component {
           value={this.state.query}
           onChange={this.updateQuery}
         />
-        <button className="fa fa-search button-icon" aria-hidden="true" type="submit" />
-      </form>
+      </div>
     );
   }
 }
