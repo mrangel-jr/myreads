@@ -1,0 +1,32 @@
+div {
+  width: 100%;
+  height: 40%;
+  margin: 0;
+  align-items: center;
+  font-family: "Barlow Condensed";
+  display: inline-block;
+}.diagonal-gradient {
+  background: linear-gradient(to bottom right, #CEFFAF, #7EF6F9);
+}
+
+.img-logo
+{
+  background-image: url('../../images/bookshelf-svgrepo-com.svg');
+	position: absolute;
+  max-width: 20%;
+  max-height: 30%;
+	top: 0;
+	left: 10%;
+  background-repeat: no-repeat;
+}
+
+.text-logo {
+  margin-left: 40%;
+  position: relative;
+  top: 40%;
+  vertical-align: middle;
+  font-size: 7vw;
+  color: #000;
+  text-align: center;
+  justify-content: center;
+}
