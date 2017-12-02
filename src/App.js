@@ -37,7 +37,6 @@ class App extends Component {
         this.setState({books});
       }
     )(); 
-    this.clearSearch();
   }
 
   onSearch(query) {
@@ -85,6 +84,11 @@ class App extends Component {
     (
       async() => {
           await update(book,shelf).then ( () => {
+            const {booksToSearch} = this.state;
+            if (booksToSearch.length !==0) {
+              let newBooks = booksToSearch.filter(bookSearch => book.id !== bookSearch.id);
+              this.setState({booksToSearch:newBooks});              
+            }
             this.getBooks();
           }).catch((err) => {
               console.log(err);
@@ -100,6 +104,7 @@ class App extends Component {
             <HomePage
               books={this.state.books} 
               onUpdateBook={this.updateBook}
+              clearSearch={this.clearSearch}
             />
           )}/>
           <Route 
@@ -107,10 +112,7 @@ class App extends Component {
             render={({history}) => (
               <SearchPage
                 books={this.state.booksToSearch} 
-                onUpdateBook={(book,shelf) => {
-                  this.updateBook(book,shelf)
-                  history.push('/')
-                }}
+                onUpdateBook={this.updateBook}
                 onSearch={this.onSearch}
                 clearSearch={this.clearSearch}
               />

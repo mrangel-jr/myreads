@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import './addbook.css';
 
 
-const AddBook = () => {
+const AddBook = ({clearSearch}) => {
 
 	return (
-		<Link className="scroll" to="/search"></Link>
+		<Link className="scroll" to="/search" onClick={() => clearSearch()}></Link>
 	);
 }
 

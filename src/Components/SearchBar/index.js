@@ -13,8 +13,11 @@ class SearchBar extends Component {
   }
 
   updateQuery(e) {
-    this.setState({ query: e.target.value });
-    this.submitQuery();
+    (
+      async () => {
+        await this.setState({ query: e.target.value });
+        this.submitQuery();
+    })();
   }
 
 
