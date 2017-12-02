@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "escape-string-regexp": "^1.0.5",
+    "eslint-plugin-import": "^2.8.0",
     "husky": "^0.14.3",
     "lint-staged": "^5.0.0",
     "prettier": "^1.8.2",
