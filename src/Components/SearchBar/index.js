@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import debounce from 'lodash/debounce';
 import './searchbar.css';
 
 
@@ -7,27 +8,24 @@ class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = { query:'' };
-
-    this.submitQuery = this.submitQuery.bind(this);
+    this.submitQuery = debounce(() => this.props.onSearch(this.state.query),200);
     this.updateQuery = this.updateQuery.bind(this);
   }
 
   updateQuery(e) {
     (
       async () => {
+        const value = e.target.value;
         await this.setState({ query: e.target.value });
+        this.setState({ query: value });
         this.submitQuery();
     })();
-  }
-
-
-  submitQuery() {
-    this.props.onSearch(this.state.query);
   }
 
   render() {
 
     const {clearSearch} = this.props;
+    const {query} = this.state;
     return (
       <div className="searchbar">
       <Link className="fa fa-arrow-left button-icon" aria-hidden="true" to="/" onClick={() => clearSearch()}/>      
@@ -35,7 +33,7 @@ class SearchBar extends Component {
           className="input-data"
           type="text"
           placeholder="Type something to find a book"
-          value={this.state.query}
+          value={query}
           onChange={this.updateQuery}
         />
       </div>

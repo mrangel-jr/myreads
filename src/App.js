@@ -20,13 +20,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    (
-      async () => {
-        let books;
-        books = await getAll();
-        this.setState({books});
-      }
-    )();
+    this.getBooks();
   }
 
   getBooks() {
@@ -51,13 +45,9 @@ class App extends Component {
 
         myBooks = books.filter( book => (book.title && match.test(book.title)) || (book.authors && match.test(book.authors.toString()))) ;
 
-        if (booksQuery.error)
-          this.setState({booksToSearch: myBooks});
+        if (booksQuery.error || books === [])
+          this.setState({booksToSearch: []});
         else {
-          if (books === []) {
-            this.setState({booksToSearch: booksQuery});
-          } 
-          else {
             let newBooks = booksQuery.filter(function(bookQuery) {
               return !myBooks.some(function(myBook){
                 return bookQuery.id === myBook.id;
@@ -68,7 +58,6 @@ class App extends Component {
 
             this.setState({booksToSearch: newBooks});
           }
-        }
       })
     } 
     else {
