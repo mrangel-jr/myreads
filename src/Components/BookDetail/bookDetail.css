@@ -1,8 +1,9 @@
 .bookDetail {
 	margin-top: 20px;
 	margin-left: 10%;
-	align-items: center;
 	display: flex;
+	justify-content: center;
+	/*flex-wrap: wrap;*/
 }
 
 
@@ -10,10 +11,20 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     height: 190px;
-    width: 128px;
+    width: 190px;
 }
 
 .bookInformation {
-	align-items: flex-start;
-	vertical-align: top;
+	float: left;
+	padding: 0;
+	top: 0;
+	justify-content: center;
+	vertical-align: middle;
+}
+
+.bookTitle {
+	top: 5%;
+	margin-left: 15%;
+	font-weight: 1000;
+
 }
