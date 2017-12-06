@@ -9,12 +9,13 @@ import {
 
 import HomePage from "./Pages/HomePage";
 import SearchPage from "./Pages/SearchPage";
+import BookDetailPage from "./Pages/BookDetailPage";
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { books: [], booksToSearch: [] };
+    this.state = { books: [], booksToSearch: [], bookSelected: '' };
     this.onSearch = this.onSearch.bind(this);
     this.updateBook = this.updateBook.bind(this);
   }
@@ -93,6 +94,7 @@ class App extends Component {
             <HomePage
               books={this.state.books} 
               onUpdateBook={this.updateBook}
+              onClick={this.goToDetais}
               clearSearch={this.clearSearch}
             />
           )}/>
@@ -106,6 +108,15 @@ class App extends Component {
                 clearSearch={this.clearSearch}
               />
             )}/>
+          <Route 
+            path="/details/:id"
+            render={({match}) => (
+              <BookDetailPage
+                books={this.state.books}
+                bookId={match.params.id}
+                book={this.state.books.filter(book => book.id===match.params.id)[0]}
+              />
+          )}/>
         </div>
     )
   }
