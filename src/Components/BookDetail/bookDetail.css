@@ -3,6 +3,9 @@
 	margin-left: 10%;
 	display: flex;
 	justify-content: center;
+	float: left;
+	/*vertical-align: middle;*/
+	align-items: flex-start;
 	/*flex-wrap: wrap;*/
 }
 
@@ -12,6 +15,7 @@
     border-radius: 4px;
     height: 190px;
     width: 190px;
+    clear:left;
 }
 
 .bookInformation {
@@ -24,7 +28,15 @@
 
 .bookTitle {
 	top: 5%;
-	margin-left: 15%;
-	font-weight: 1000;
+    margin-left: 15%;
+    font-weight: 1000;
+    margin-bottom: 0;
+    margin-top: 0;
+}
 
+.bookSubTitle {
+	font-size: 1em;
+    margin-left: 15%;
+    margin-top: 0;
+    color: darkgray;
 }

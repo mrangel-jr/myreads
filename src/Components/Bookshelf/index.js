@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import Book from '../Book';
 import './bookshelf.css';
 
-const Bookshelf = ({ books, onUpdateBook, goToDetais, label, shelf }) => {
+const Bookshelf = ({ books, onUpdateBook, label, shelf }) => {
 
 	Bookshelf.propTypes = {
 		books: PropTypes.array,
-		onUpdateBook: PropTypes.func
+		onUpdateBook: PropTypes.func,
 	}
 
   	let newBooks = [];
@@ -28,7 +28,7 @@ const Bookshelf = ({ books, onUpdateBook, goToDetais, label, shelf }) => {
 	          	newBooks.map((book) => {
 	          	return (
 		            <li key={book.id}>
-		              <Book book={book} onUpdate={onUpdateBook} goToDetais={goToDetais}/>
+		              <Book book={book} onUpdate={onUpdateBook}/>
 		            </li>
 	          	);
 	          })

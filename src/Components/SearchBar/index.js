@@ -28,7 +28,7 @@ class SearchBar extends Component {
     const {query} = this.state;
     return (
       <div className="searchbar">
-      <Link className="fa fa-arrow-left button-icon" aria-hidden="true" to="/" onClick={() => clearSearch()}/>      
+      <Link className="fa fa-arrow-left button-icon" aria-hidden="true" to="/" onClick={clearSearch}/>      
         <input
           className="input-data"
           type="text"

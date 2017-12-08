@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import './book.css';
 
-const Book = ({ book, onUpdate, goToDetais }) => {
+const Book = ({ book, onUpdate }) => {
 
 	Book.propTypes = {
 		book: PropTypes.object,
@@ -19,7 +19,7 @@ const Book = ({ book, onUpdate, goToDetais }) => {
 		<div>
 			<div className="book">
 				<div className="book-top">
-					<Link className="book-cover" style={{ backgroundImage: `url(${image})` }} to={`/details/${book.id}`} onClick={() => goToDetais}></Link>
+					<Link className="book-cover" style={{ backgroundImage: `url(${image})` }} to={`/details/${book.id}`} onClick={() => console.log(book)}></Link>
 					<div className="book-shelf-changer">
 					<select value={shelf} onChange={(event) => onUpdate(book,event.target.value)
 					}>

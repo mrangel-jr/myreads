@@ -94,7 +94,6 @@ class App extends Component {
             <HomePage
               books={this.state.books} 
               onUpdateBook={this.updateBook}
-              onClick={this.goToDetais}
               clearSearch={this.clearSearch}
             />
           )}/>
@@ -112,9 +111,7 @@ class App extends Component {
             path="/details/:id"
             render={({match}) => (
               <BookDetailPage
-                books={this.state.books}
-                bookId={match.params.id}
-                book={this.state.books.filter(book => book.id===match.params.id)[0]}
+                book={this.state.books.filter(book => match.params.id===book.id)[0]}
               />
           )}/>
         </div>
