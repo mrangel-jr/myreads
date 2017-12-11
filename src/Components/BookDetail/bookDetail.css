@@ -1,12 +1,32 @@
-.bookDetail {
-	margin-top: 20px;
-	margin-left: 10%;
-	display: flex;
+.bookContainer {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  position: relative;
+  float: left;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.bookTopic {
+	position: relative;
+	float: right;
+	margin-top: 5%;
+	margin-left: 15%;
+	flex-direction: row;
 	justify-content: center;
-	float: left;
-	/*vertical-align: middle;*/
-	align-items: flex-start;
-	/*flex-wrap: wrap;*/
+}
+
+.bookDetail {
+	margin-left: 15%;
+	margin-bottom: 0;
+	margin-top: 0;
+	margin-right: 0;
+	flex-wrap: wrap;
+	padding: 0;
+	top: 0;
+	flex-direction: row;
+	display: inline-block;
 }
 
 
@@ -14,29 +34,82 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     height: 190px;
-    width: 190px;
-    clear:left;
-}
-
-.bookInformation {
-	float: left;
-	padding: 0;
-	top: 0;
-	justify-content: center;
-	vertical-align: middle;
+    width: 130px;
+    justify-content: center;
+    align-items: center;
 }
 
 .bookTitle {
-	top: 5%;
-    margin-left: 15%;
     font-weight: 1000;
-    margin-bottom: 0;
-    margin-top: 0;
+    margin: 0;
+    font-size: 2.5em;
 }
 
 .bookSubTitle {
 	font-size: 1em;
-    margin-left: 15%;
+    margin-left: 0;
     margin-top: 0;
     color: darkgray;
+}
+
+.bookInfo {
+	font-size: 1em;
+	color: darkgray;
+	padding-left: 3%;
+	font-weight: 700;
+	text-align: justify;
+	padding-right: 3%;
+    /*text-justify: inter-word;*/
+}
+
+.columns {
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  vertical-align: middle;
+}
+ 
+.column {
+  flex: 0;
+  padding-top: 2%;
+  align-self: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+ 
+.main-column {
+  flex: 1;
+  margin: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: flex-start;
+
+}
+
+.line {
+  flex: 1;
+  box-sizing:border-box;
+  padding-left: 25%;
+  padding-top:5%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  max-width: 100%;
+  width: 100%;
+}
+
+.infoContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	align-self: flex-start;
+	flex:1;
+	margin-top:0;
+	box-sizing: border-box;
+	padding-left: 10%;
 }

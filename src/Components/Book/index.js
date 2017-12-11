@@ -10,16 +10,15 @@ const Book = ({ book, onUpdate }) => {
 		onUpdateBook: PropTypes.func
 	}
 	
-	let shelf = book.shelf ? book.shelf : "none";
-	let title = book.title;
-	let authors = book.authors ? book.authors.toString() : '';
-	let image = book.imageLinks ? book.imageLinks.thumbnail : '';
+	const shelf = book.shelf ? book.shelf : "none";
+	const title = book.title;
+	const image = book.imageLinks ? book.imageLinks.thumbnail : '';
 
 	return (
 		<div>
 			<div className="book">
 				<div className="book-top">
-					<Link className="book-cover" style={{ backgroundImage: `url(${image})` }} to={`/details/${book.id}`} onClick={() => console.log(book)}></Link>
+					<Link className="book-cover" style={{ backgroundImage: `url(${image})` }} to={`/details/${book.id}`}></Link>
 					<div className="book-shelf-changer">
 					<select value={shelf} onChange={(event) => onUpdate(book,event.target.value)
 					}>
@@ -32,9 +31,6 @@ const Book = ({ book, onUpdate }) => {
 					</div>
 				</div>
 				<div className="book-title">{title}</div>
-				{
-					// <div className="book-authors">{authors} </div>
-				}
 			</div>
 		</div>
 	);

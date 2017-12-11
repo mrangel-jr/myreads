@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import {Link, withRouter } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import './searchbar.css';
 
@@ -10,6 +10,16 @@ class SearchBar extends Component {
     this.state = { query:'' };
     this.submitQuery = debounce(() => this.props.onSearch(this.state.query),200);
     this.updateQuery = this.updateQuery.bind(this);
+    this.selectedBook = this.props.selectedBook;
+  }
+
+  componentWillMount() {
+    this.props.history.listen((location ) => {
+      if (location.pathname.split("/").length === 3) {
+        const key = location.pathname.split("/")[2] ;
+        this.selectedBook('query',key);
+      }
+    })
   }
 
   updateQuery(e) {
@@ -41,4 +51,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default withRouter(SearchBar);

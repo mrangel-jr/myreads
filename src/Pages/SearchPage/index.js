@@ -18,10 +18,10 @@ const Result = ({ books, onUpdateBook, search }) => {
 	)
 }
 
-const SearchPage = ({ books, onUpdateBook, onSearch, clearSearch }) => {
+const SearchPage = ({ books, onUpdateBook, onSearch, clearSearch, selectedBook }) => {
   return (
     <div>
-    	<SearchBar onSearch={onSearch} clearSearch={clearSearch}/>
+    	<SearchBar onSearch={onSearch} clearSearch={clearSearch} books={books} selectedBook={selectedBook}/>
     	<Result books={books} onUpdateBook={onUpdateBook} shelf="none" label="My Search"/>
     </div>
   );

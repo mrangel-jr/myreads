@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Route } from "react-router-dom";
+import { Route, withRouter } from "react-router-dom";
 import escapeRegExp from 'escape-string-regexp';
 import {
+  get,
   getAll,
   update,
   search,
@@ -18,18 +19,52 @@ class App extends Component {
     this.state = { books: [], booksToSearch: [], bookSelected: '' };
     this.onSearch = this.onSearch.bind(this);
     this.updateBook = this.updateBook.bind(this);
+    this.selectedBook = this.selectedBook.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   componentDidMount() {
     this.getBooks();
   }
 
+  componentWillMount() {
+    this.props.history.listen((location ) => {
+      if (location.pathname.split("/").length === 3) {
+        const key = location.pathname.split("/")[2] ;
+        this.selectedBook('shelf',key);
+      }
+    });
+  }
+
+  selectedBook(place,key) {
+    (
+      async() => {
+        let books = [];
+        if (place==='shelf') {
+          books = this.state.books;
+        } else {
+          books = this.state.booksToSearch;
+        }
+        console.log(books);
+        const bookSelected = books.filter(book => book.id === key)[0];
+        await this.setState({bookSelected});
+      }
+    )();
+   //  (
+   //    async() => {
+   //      await get(key).then(bookSelected =>
+   //        this.setState({bookSelected})
+   //    );
+   // })();
+  }
+
+
   getBooks() {
     (
       async () =>{
-        let books;
-        books = await getAll();
-        this.setState({books});
+        await getAll().then(books =>
+          this.setState({books})
+        );
       }
     )(); 
   }
@@ -105,13 +140,14 @@ class App extends Component {
                 onUpdateBook={this.updateBook}
                 onSearch={this.onSearch}
                 clearSearch={this.clearSearch}
+                selectedBook={this.selectedBook}
               />
             )}/>
           <Route 
             path="/details/:id"
-            render={({match}) => (
+            render={() => (
               <BookDetailPage
-                book={this.state.books.filter(book => match.params.id===book.id)[0]}
+                book={this.state.bookSelected}
               />
           )}/>
         </div>
@@ -119,4 +155,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
