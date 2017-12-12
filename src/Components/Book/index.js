@@ -18,7 +18,7 @@ const Book = ({ book, onUpdate }) => {
 		<div>
 			<div className="book">
 				<div className="book-top">
-					<Link className="book-cover" style={{ backgroundImage: `url(${image})` }} to={`/details/${book.id}`}></Link>
+					<Link className="book-cover" style={{ backgroundImage: `url(${image})` }} to={`/details/${book.id}`} ></Link>
 					<div className="book-shelf-changer">
 					<select value={shelf} onChange={(event) => onUpdate(book,event.target.value)
 					}>

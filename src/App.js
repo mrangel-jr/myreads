@@ -29,6 +29,7 @@ class App extends Component {
 
   componentWillMount() {
     this.props.history.listen((location ) => {
+      console.log(location);
       if (location.pathname.split("/").length === 3) {
         const key = location.pathname.split("/")[2] ;
         this.selectedBook('shelf',key);
@@ -37,25 +38,25 @@ class App extends Component {
   }
 
   selectedBook(place,key) {
+    // (
+    //   async() => {
+    //     let {books} = this.state;
+    //     // console.log(place);
+    //     if (place==='query') {
+    //       books = this.state.booksToSearch;
+    //     }
+    //     console.log(books);
+    //     const bookSelected = books.filter(book => book.id === key)[0];
+    //     await this.setState({bookSelected});
+    //   }
+    // )();
     (
       async() => {
-        let books = [];
-        if (place==='shelf') {
-          books = this.state.books;
-        } else {
-          books = this.state.booksToSearch;
-        }
-        console.log(books);
-        const bookSelected = books.filter(book => book.id === key)[0];
-        await this.setState({bookSelected});
+        let book = await get(key).then(bookSelected =>
+          this.setState({bookSelected})
+        );
       }
     )();
-   //  (
-   //    async() => {
-   //      await get(key).then(bookSelected =>
-   //        this.setState({bookSelected})
-   //    );
-   // })();
   }
 
 
@@ -102,7 +103,7 @@ class App extends Component {
   }
 
   clearSearch() {
-    this.setState({booksToSearch: []});
+    this.setState({booksToSearch: [], bookSelected:''});
   }
 
   updateBook(book,shelf) {
@@ -133,7 +134,7 @@ class App extends Component {
             />
           )}/>
           <Route 
-            path="/search"
+            exact path="/search"
             render={({history}) => (
               <SearchPage
                 books={this.state.booksToSearch} 
