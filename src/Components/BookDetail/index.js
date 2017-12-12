@@ -5,7 +5,6 @@ const BookDetail = ({book}) => {
 	console.log(book);
 	
 	const image = book.imageLinks ? book.imageLinks.thumbnail : '';
-	const averageRating = book.averageRating ? book.averageRating : 0;
 	const authors = book.authors ? book.authors.toString() : 'Unknown';
 	const categories = book.categories ? book.categories.toString() : 'Undefined';
 	const publisher = book.publisher ? book.publisher : 'Undefined';
@@ -41,20 +40,6 @@ const BookDetail = ({book}) => {
 				</div>
 			</div>
 		</div>
-		// {
-		// 	<div className="bookContainer">
-		// 		<div className="bookTopic">
-		// 				<h1 className="bookTitle">{book.title}</h1>
-		// 				<h2 className="bookSubTitle">{book.subtitle}</h2>
-		// 		</div>
-		// 		<div className="bookDetail">
-		// 			<div >
-		// 				<div className="bookImage" style={{ backgroundImage: `url(${image})` }}></div>
-		// 				<h3 className="bookAuthors">{book.authors.toString()}</h3>
-		// 			</div>
-		// 		</div>
-		// 	</div>
-		// }
 	)
 }
 

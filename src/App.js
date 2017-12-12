@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Route, withRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 import escapeRegExp from 'escape-string-regexp';
 import {
-  get,
   getAll,
   update,
   search,
@@ -19,46 +18,12 @@ class App extends Component {
     this.state = { books: [], booksToSearch: [], bookSelected: '' };
     this.onSearch = this.onSearch.bind(this);
     this.updateBook = this.updateBook.bind(this);
-    this.selectedBook = this.selectedBook.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
   }
 
   componentDidMount() {
     this.getBooks();
   }
-
-  componentWillMount() {
-    this.props.history.listen((location ) => {
-      console.log(location);
-      if (location.pathname.split("/").length === 3) {
-        const key = location.pathname.split("/")[2] ;
-        this.selectedBook('shelf',key);
-      }
-    });
-  }
-
-  selectedBook(place,key) {
-    // (
-    //   async() => {
-    //     let {books} = this.state;
-    //     // console.log(place);
-    //     if (place==='query') {
-    //       books = this.state.booksToSearch;
-    //     }
-    //     console.log(books);
-    //     const bookSelected = books.filter(book => book.id === key)[0];
-    //     await this.setState({bookSelected});
-    //   }
-    // )();
-    (
-      async() => {
-        let book = await get(key).then(bookSelected =>
-          this.setState({bookSelected})
-        );
-      }
-    )();
-  }
-
 
   getBooks() {
     (
@@ -146,9 +111,9 @@ class App extends Component {
             )}/>
           <Route 
             path="/details/:id"
-            render={() => (
+            render={(match) => (
               <BookDetailPage
-                book={this.state.bookSelected}
+                book={this.state.books.concat(this.state.booksToSearch).filter(book => book.id === match.match.params.id)[0]}
               />
           )}/>
         </div>
@@ -156,4 +121,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default App;
